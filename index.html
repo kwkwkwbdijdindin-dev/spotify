@@ -38,3 +38,202 @@ body{
 .r2 .track{animation:right 26s linear infinite;font-size:clamp(26px,6vw,58px);opacity:.8}
 .r3 .track{animation:left 34s linear infinite;font-size:clamp(22px,4.5vw,44px);opacity:.65}
 .r3{transform:rotate(-2deg)}
+@keyframes left{to{transform:translateX(-50%)}}
+@keyframes right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* vertical marquees */
+.v{position:fixed;top:0;bottom:0;width:clamp(30px,5vw,56px);overflow:hidden;z-index:1;opacity:.75}
+.v.a{left:4px}.v.b{right:4px}
+.vt{display:flex;flex-direction:column;width:100%;align-items:center;will-change:transform}
+.vt span{writing-mode:vertical-rl;font-weight:800;font-size:clamp(20px,3.6vw,34px);padding-bottom:.6em}
+.v.a .vt{animation:up 30s linear infinite}
+.v.b .vt{animation:down 30s linear infinite}
+@keyframes up{to{transform:translateY(-50%)}}
+@keyframes down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+
+/* center */
+.center{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:center;padding:0 clamp(40px,8vw,90px)}
+.card{text-align:center;max-width:440px;width:100%;animation:pop .9s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:none}}
+
+.disc{
+  width:clamp(120px,32vw,170px);aspect-ratio:1;margin:0 auto 18px;border-radius:50%;position:relative;
+  background:conic-gradient(from 0deg,var(--c1),var(--c4),var(--c2),var(--c3),var(--c5),var(--c1));
+  animation:spin 6s linear infinite;box-shadow:0 0 60px rgba(255,255,255,.2);
+}
+.disc::before{content:"";position:absolute;inset:6%;border-radius:50%;
+  background:repeating-radial-gradient(circle,#0a0a0a 0 3px,#1f1f1f 3px 6px)}
+.disc::after{content:"";position:absolute;inset:38%;border-radius:50%;background:var(--bg);
+  box-shadow:inset 0 0 0 5px var(--c3)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.eq{display:flex;gap:5px;justify-content:center;align-items:flex-end;height:30px;margin-bottom:14px}
+.eq i{width:6px;border-radius:3px;background:var(--c1);animation:bar 1s ease-in-out infinite;height:100%;transform-origin:bottom}
+.eq i:nth-child(2){background:var(--c2);animation-delay:-.2s}
+.eq i:nth-child(3){background:var(--c3);animation-delay:-.45s}
+.eq i:nth-child(4){background:var(--c4);animation-delay:-.7s}
+.eq i:nth-child(5){background:var(--c5);animation-delay:-.1s}
+@keyframes bar{0%,100%{transform:scaleY(.2)}50%{transform:scaleY(1)}}
+
+h1{margin:0 0 6px;font-size:clamp(30px,7vw,44px);font-weight:800;letter-spacing:-.02em}
+.sub{margin:0 0 22px;color:var(--muted);font-weight:500}
+.note{margin:0 0 12px;font-weight:500;font-size:15px;color:var(--ink);animation:wob 3s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg) translateY(-2px)}}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:999px;
+  background:linear-gradient(110deg,var(--c1),var(--c5),var(--c3),var(--c2),var(--c4),var(--c1));
+  background-size:300% 100%;animation:slide 6s linear infinite,pulse 2.4s ease-in-out infinite;
+  color:#000;font:800 17px var(--font);text-decoration:none;
+  transition:transform .2s;
+}
+.btn:hover{transform:scale(1.06)}
+.btn:active{transform:scale(.96)}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+@keyframes slide{to{background-position:300% 0}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.5)}50%{box-shadow:0 0 0 16px rgba(255,255,255,0)}}
+
+.b2w{margin-top:14px}
+.cb-h{padding-top:calc(12px + env(safe-area-inset-top,0px));font-size:18px}
+.cb-x{margin-left:auto;width:38px;height:38px;border-radius:50%;border:0;cursor:pointer;font-size:18px;font-weight:800;background:rgba(0,0,0,.12);color:#000}
+.cb-x:hover{background:rgba(0,0,0,.25)}
+.cb-x:focus-visible{outline:3px solid #000;outline-offset:2px}
+.cb-m,.cb-f{width:100%;max-width:760px;margin-left:auto;margin-right:auto}
+.cb-f{padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+.bb{font-size:16px}
+.btn2{padding:13px 26px;border-radius:999px;border:2px solid var(--c4);background:transparent;color:var(--ink);font:800 16px var(--font);cursor:pointer;animation:jelly 2.8s ease-in-out infinite;transition:background .2s,color .2s,border-color .2s}
+.btn2:hover{background:var(--c4);color:#120e28}
+.btn2:active{transform:scale(.94)}
+.btn2:focus-visible{outline:3px solid var(--c3);outline-offset:4px}
+.btn2.hit{animation:hit .5s ease-out;border-color:var(--c3)}
+@keyframes jelly{0%,100%{transform:scale(1,1)}40%{transform:scale(1.05,.95)}60%{transform:scale(.97,1.04)}}
+@keyframes hit{0%{transform:rotate(0)}25%{transform:rotate(-6deg) scale(1.08)}50%{transform:rotate(6deg) scale(1.08)}100%{transform:rotate(0)}}
+/* floating notes */
+.fl{position:fixed;bottom:-40px;z-index:0;font-size:24px;opacity:0;animation:float linear infinite;pointer-events:none}
+@keyframes float{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.5}100%{transform:translateY(-110vh) rotate(40deg);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;animation-iteration-count:1!important}
+  .track,.vt{animation:none!important}
+}
+.cb-fab{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:20;width:58px;height:58px;border-radius:50%;border:0;cursor:pointer;font-size:26px;background:#fff;color:#000;filter:grayscale(1);animation:fab 2.6s ease-in-out infinite}
+@keyframes fab{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.06)}}
+.cb-fab:focus-visible,.cb-send:focus-visible,.cb-in:focus-visible{outline:3px solid var(--c3);outline-offset:2px}
+.cb{position:fixed;inset:0;z-index:40;width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;background:#0a0a0a;transform-origin:bottom right;transition:transform .3s cubic-bezier(.2,1.3,.4,1),opacity .2s}
+.cb[hidden]{display:flex;opacity:0;transform:scale(.6);pointer-events:none;visibility:hidden}
+.cb-h{padding:12px 16px;font-weight:800;background:#fff;color:#000;display:flex;align-items:center;gap:8px}
+.cb-h b{width:9px;height:9px;border-radius:50%;background:#000;animation:pulse2 1.6s infinite}
+@keyframes pulse2{50%{opacity:.35}}
+.cb-m{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.cb-e{margin:auto;color:var(--muted);font-size:14px;text-align:center}
+.bb{max-width:80%;padding:9px 13px;border-radius:16px;font-size:15px;line-height:1.35;animation:in .25s ease-out both;word-wrap:break-word}
+.bb.u{align-self:flex-end;background:#fff;color:#000;border-bottom-right-radius:4px}
+.bb.b{align-self:flex-start;background:#262626;color:var(--ink);border-bottom-left-radius:4px}
+@keyframes in{from{opacity:0;transform:translateY(8px) scale(.95)}}
+.dots{display:inline-flex;gap:4px}.dots i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:dt 1s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes dt{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.cb-f{display:flex;gap:8px;padding:10px;border-top:1px solid rgba(255,255,255,.2)}
+.cb-in{flex:1;min-width:0;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:#000;color:var(--ink);font:500 16px var(--font)}
+.cb-send{border:0;border-radius:999px;padding:0 16px;cursor:pointer;font:800 15px var(--font);background:#fff;color:#000}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="row r1"><div class="track" data-m></div></div>
+  <div class="row r2"><div class="track" data-m></div></div>
+
+  <main class="center">
+    <div class="card">
+      <div class="disc" aria-hidden="true"></div>
+      <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <h1>Cuman Lagu</h1>
+      <p class="sub">Satu playlist, tinggal putar.</p>
+      <p class="note">tidak ada unsur menyinggung ke siapa pun😄</p>
+      <a class="btn" href="https://open.spotify.com/playlist/2ZCcjnRjR92zHlb0xfCiTV?si=enPAxheIR1GfT0_wsiGHYg&amp;utm_source=copy-link&amp;pi=K2xYOU0PSp2gC" target="_blank" rel="noopener">Putar di Spotify</a>
+      
+    </div>
+  </main>
+
+  <div class="row r3"><div class="track" data-m></div></div>
+</div>
+
+<div class="v a" aria-hidden="true"><div class="vt" data-v></div></div>
+<div class="v b" aria-hidden="true"><div class="vt" data-v></div></div>
+<div id="fl" aria-hidden="true"></div>
+<button class="cb-fab" id="cbFab" aria-label="Buka chat" aria-expanded="false">💬</button>
+<section class="cb" id="cb" aria-label="Chat bot" hidden>
+  <div class="cb-h"><b></b>Chat Bot<button class="cb-x" id="cbX" type="button" aria-label="Tutup chat">✕</button></div>
+  <div class="cb-m" id="cbM" aria-live="polite"><div class="cb-e" id="cbE">Coba ketik “jam” 🕐</div></div>
+  <div class="cb-f"><input class="cb-in" id="cbIn" type="text" placeholder="Ketik pesan" autocomplete="off" enterkeyhint="send"><button class="cb-send" id="cbSend">Kirim</button></div>
+</section>
+
+<script>
+(function(){
+  var word="cuman lagu";
+  function fill(el,n,vertical){
+    var h="";
+    for(var i=0;i<n;i++){
+      h+='<span class="w" style="animation-delay:-'+(i*1.4).toFixed(1)+'s">'+word+(vertical?'':' ♪')+'</span>';
+    }
+    el.innerHTML=h;
+  }
+  document.querySelectorAll("[data-m]").forEach(function(t,k){fill(t,24,false);t.style.animationDelay="-"+(k*3)+"s"});
+  document.querySelectorAll("[data-v]").forEach(function(t,k){fill(t,16,true)});
+  var f=document.getElementById("fl"),notes=["♪","♫","♬"],cols=["#ffffff","#8a8a8a","#d4d4d4","#707070","#bdbdbd"];
+  for(var i=0;i<14;i++){
+    var s=document.createElement("span");
+    s.className="fl";s.textContent=notes[i%3];
+    s.style.left=(8+Math.random()*84)+"%";
+    s.style.color=cols[i%5];
+    s.style.animationDuration=(9+Math.random()*9)+"s";
+    s.style.animationDelay="-"+(Math.random()*14)+"s";
+    f.appendChild(s);
+  }
+})();
+</script>
+<script>
+(function(){
+  var fab=document.getElementById("cbFab"),box=document.getElementById("cb"),m=document.getElementById("cbM"),
+      inp=document.getElementById("cbIn"),send=document.getElementById("cbSend"),empty=document.getElementById("cbE");
+  var step=0,busy=false;
+  function toggle(){
+    var open=box.hasAttribute("hidden");
+    if(open){box.removeAttribute("hidden");inp.focus()}else{box.setAttribute("hidden","")}
+    fab.setAttribute("aria-expanded",open);fab.textContent=open?"✕":"💬";
+  }
+  fab.addEventListener("click",toggle);
+  document.getElementById("cbX").addEventListener("click",toggle);
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!box.hasAttribute("hidden"))toggle()});
+
+  function add(txt,who){
+    if(empty){empty.remove();empty=null}
+    var d=document.createElement("div");d.className="bb "+who;d.textContent=txt;
+    m.appendChild(d);m.scrollTop=m.scrollHeight;return d;
+  }
+  function reply(text){
+    if(step===0){step=1;return "mls ah gak mood coba ketik “hai” dulu"}
+    if(step===1){
+      if(text==="hai"){step=2;return "manut banget jadi manusia wkwkwk"}
+      return "tolong ketik hai dulu";
+    }
+    if(step===2){
+      if(text==="hai"){step=3;return "mls ah gak mood lagi coba lain kali"}
+      return "tolong ketik hai dulu";
+    }
+    return "wes limit wkwkwk, limit sabarnya masih proses, belum terhubung ke Claude";
+  }
+  function submit(){
+    var raw=inp.value.trim();
+    if(!raw||busy)return;
+    inp.value="";add(raw,"u");busy=true;
+    var out=reply(raw.toLowerCase());
+    var t=add("","b");t.innerHTML='<span class="dots"><i></i><i></i><i></i></span>';
+    setTimeout(function(){t.textContent=out;m.scrollTop=m.scrollHeight;busy=false;inp.focus()},700);
+  }
+  send.addEventListener("click",submit);
+  inp.addEventListener("keydown",function(e){if(e.key==="Enter")submit()});
+})();
+</script>
+</body>
+</html>
